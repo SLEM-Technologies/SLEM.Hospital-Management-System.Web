@@ -36,7 +36,7 @@ export default function DepartmentsPage() {
       </div>
       <div className="w-full flex space-x-4">
         <div className="w-full shadow-md bg-white rounded-md px-5">
-          <header className="flex justify-between items-center pt-4">
+          <header className="flex flex-col md:flex-row md:justify-between items-center pt-4">
             <h2 className="font-bold text-sm md:text-lg text-primaryDarkBlue">
               Departments List
             </h2>

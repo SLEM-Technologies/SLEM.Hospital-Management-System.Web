@@ -25,11 +25,11 @@ function Profile() {
   }
 
   return (
-    <div className="min-h-svh w-full md:mt-8">
-      <div className="max-w-md mx-auto bg-white shadow-md rounded-md overflow-hidden">
+    <div className="w-full md:max-w-2xl md:mx-auto">
+      <div className="w-full overflow-hidden">
         {/* SHOW PROFILE */}
         {!editProfile && (
-          <div>
+          <div className="bg-white shadow-md rounded-md">
             <div className="flex sm:flex-col sm:items-center px-6 py-4 md:py-8">
               <img
                 className="mx-auto sm:mx-0 sm:flex-shrink-0 h-24 rounded-full"

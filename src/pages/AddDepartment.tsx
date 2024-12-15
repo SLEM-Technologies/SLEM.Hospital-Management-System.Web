@@ -23,7 +23,7 @@ export default function AddDepartment() {
   
 
     return (
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-2xl mx-auto mt-4 md:mt-24">
         <h2 className="text-lg font-semibold">Add Department</h2>
         <form className="grid mt-8" onSubmit={handleSubmit(onSubmit)}>
           
@@ -34,7 +34,7 @@ export default function AddDepartment() {
             </p>
 
             {/* DEPARTMENT NAME & DOCTOR NAME */}
-            <div className="grid grid-cols-2 gap-5 mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4">
               <div className="space-y-2">
                 <Label name="departmentName" label="Department Name" className="text-xs text-red-600" required={true} />
                 <input
@@ -71,7 +71,7 @@ export default function AddDepartment() {
             </div>
 
             {/* HEAD OF DEPARTMENT NAME & STATUS */}
-            <div className="grid grid-cols-2 gap-5 mt-4 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4 mb-8">
             <div className="space-y-2">
                 <Label name="headDepartment" label="Head Department" className="text-xs text-red-600" required={true} />
                 <select

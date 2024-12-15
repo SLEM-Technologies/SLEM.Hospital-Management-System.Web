@@ -1,12 +1,13 @@
 import Button from "@/components/Button";
 import { useState, ChangeEvent} from "react";
 import Input from "@/components/Input";
+import Label from "../components/Label";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerPatientSchema } from "../components/addDoctor/formSchemas";
-import Label from "../components/Label";
+
 import {
   sanitizeToLetters,
   sanitizeToPhoneNumber,
@@ -21,8 +22,12 @@ export default function RegisterPatientPage() {
   const [chooseDate, setChooseDate] = useState<Date | null>(null);
 
   const { register, handleSubmit,reset,setValue,trigger, formState: { errors } } = useForm({
-    resolver: yupResolver(registerPatientSchema)
+    resolver: yupResolver(registerPatientSchema),
+    mode: "all",
+    reValidateMode: "onSubmit"
   });
+ 
+
   const onSubmit = data => {
     console.log("Form is about to be submitted");
     console.log(data);
@@ -54,15 +59,8 @@ export default function RegisterPatientPage() {
                   onChange={(e:ChangeEvent<HTMLInputElement>) => {
                     setValue("firstName", sanitizeToLetters(e.target.value));
                     trigger("firstName");
-                    
-                    // // console.log(e.target.value);
-                    // // const sanitizedValue = e.target.value;
-                    // // setValue("firstName", sanitizedValue);
-                    // // trigger("firstName");
-          
-                    // console.log(e.target.value); 
-                    
-                  }}
+}}
+
                   {...register("firstName")}
                 />
 

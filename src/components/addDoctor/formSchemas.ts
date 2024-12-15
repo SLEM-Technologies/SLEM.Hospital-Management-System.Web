@@ -25,6 +25,7 @@ export const loginSchema  = yup.object().shape({
       /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,}$/,
       "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character"
     ),
+  
   })
 
 // SIGNUP SCHEMA
@@ -38,6 +39,25 @@ export const signUpSchema  = yup.object().shape({
       /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,}$/,
       "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character"
     ),
+    phoneNumber: yup 
+    .string()
+    .required("Phone number is required")
+    .test('is-11-digits','Phone number must be digits only',(value) => /^\d{1,11}$/.test(value))
+    .min(11,"Phone number cannot be less than 11 digits")
+    .max(11,"Phone number cannot exceeds 11 digits"),
+    firstName:yup
+    .string()
+    .required("First name is required")
+    .min(3,"First name must be at least 3 characters")
+    .matches(/^[A-Za-z]+$/,"First name must contain letters only"),
+    lastName: yup
+    .string()
+    .required("Last name is required")
+    .min(3,"Last name must be at least 3 characters")
+    .matches(/^[A-Za-z]+$/,"Last name must contain letters only"),
+    username: yup.string().required("Username is required"),
+
+
   })
 
 // REGISTER PATIENT SCHEMA
@@ -106,9 +126,8 @@ departmentName: yup
 .matches(/^[A-Za-z]+$/,"Department name must contain letters only"),
 doctor: yup
 .string()
-.required("Doctor name is required")
-.min(3,"Doctor name must be at least 3 characters")
-.matches(/^[A-Za-z]+$/,"Doctor name must contain letters only"),
+.oneOf(['0','1','2','3','4','5'], 'invalid name')
+.required('Head of department is required'),
 headDepartment: yup
 .string()
 .oneOf(['0','1','2','3','4','5'], 'invalid name')
@@ -118,6 +137,49 @@ status: yup
 .oneOf(['active','inactive'], 'invalid status')
 .required('Status is required'),
 })
+
+// ADD NEW PRESCRIPTION
+export const addNewPrescription =  yup.object().shape({
+
+  medication: yup
+  .string()
+  .required("Medication is required")
+  .min(3,"Medication must be at least 3 characters")
+  .matches(/^[A-Za-z]+$/,"Medication must contain letters only"),
+  dosage: yup
+  .string()
+  .required("Dosage is required")
+  .min(3,"Dosage must be at least 3 characters")
+  .matches(/^[A-Za-z0-9]+$/,"Dosage must contain numbers and letters only"),
+  frequency: yup
+  .string()
+  .required("Frequency is required")
+  .min(3,"Frequency must be at least 3 characters")
+  .matches(/^[A-Za-z]+$/,"Frequency must contain letters only"),
+})
+
+// ADD A NEW EMERGENCY fCONTACT
+export const addNewContact =  yup.object().shape({
+
+  name: yup
+  .string()
+  .required("Name is required")
+  .min(3,"Name must be at least 3 characters")
+  .matches(/^[A-Za-z]+$/,"Name must contain letters only"),
+  relationship: yup
+  .string()
+  .required("Relationship is required")
+  .min(3,"Relationship must be at least 3 characters")
+  .matches(/^[A-Za-z]+$/,"Relationship must contain letters only"),
+  phone:yup
+  .string()
+  .required("Contact number is required")
+  .test('is-11-digits','Phone number must be digits only',(value) => /^\d{1,11}$/.test(value))
+  .min(11,"Contact number cannot be less than 11 digits")
+  .max(11,"Contact number cannot exceeds 11 digits"),
+})
+  
+
 // SOCIAL SCHEMA
 export const socialSchema = yup.object().shape({
   facebook: yup.string().url("Invalid URL"),

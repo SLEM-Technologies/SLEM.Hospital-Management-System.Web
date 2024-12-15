@@ -5,19 +5,24 @@ import { FaTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Dropdown from "./Dropdown";
 import { Status } from "../data/constant";
-
+import { useNavigate } from "react-router-dom";
 
 
 export default function DoctorsItems({ doctors, layoutType }:{doctors:IDoctorList[], layoutType:string}) {
+  const navigate = useNavigate();
+
+  const handleDoctorClick = (doctorId) => {
+    navigate(`/doctors/doctor-profile/${doctorId}`); // Navigate to the profile page with the doctor ID
+  };
     return (
       <ul
         className={`grid w-full ${
           layoutType === "grid" ? "md:grid-cols-3 gap-6" : "md:grid-cols-2 gap-2"
         } `}
       >
-        {doctors.map((doctor) => (
+        {doctors.map((doctor,index) => (
           <li
-            key={doctor.doctorName}
+            key={index}
             className="bg-white px-4 py-6 rounded-md relative"
           >
             <div
@@ -86,7 +91,7 @@ export default function DoctorsItems({ doctors, layoutType }:{doctors:IDoctorLis
                 </div>
               </div>
             </div>
-            <Dropdown layoutType={layoutType} />
+            <Dropdown layoutType={layoutType} onChange={()=>handleDoctorClick(index)} index={index}/>
           </li>
         ))}
       </ul>

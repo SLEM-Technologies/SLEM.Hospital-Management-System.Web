@@ -1,7 +1,10 @@
 import * as React from "react"
-
 import { cn } from "@/lib/utils"
-
+interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
+  index?: React.MutableRefObject<number>;
+  onRowClick?: (index: React.MutableRefObject<number>) => void;
+   // Use index or ID as parameter
+}
 const Table = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement>
@@ -50,20 +53,47 @@ const TableFooter = React.forwardRef<
   />
 ))
 TableFooter.displayName = "TableFooter"
+const TableRow = React.forwardRef<HTMLTableRowElement,TableRowProps>(
+  ({ className, onRowClick,index, ...props }, ref) => {
+    const handleClick = () => {
+    
+      if (onRowClick) {
+        onRowClick(index); 
+        
+      }
+    };
 
-const TableRow = React.forwardRef<
-  HTMLTableRowElement,
-  React.HTMLAttributes<HTMLTableRowElement>
->(({ className, ...props }, ref) => (
-  <tr
-    ref={ref}
-    className={cn(
-      "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
-      className
-    )}
-    {...props}
-  />
-))
+    return (
+      <tr
+        ref={ref}
+        className={cn(
+          "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted w-full cursor-pointer",
+          className
+        )}
+        onClick={handleClick}
+
+         // Use the click handler
+        {...props}
+      />
+    );
+  }
+);
+// const TableRow = React.forwardRef<
+//   HTMLTableRowElement,
+//   React.HTMLAttributes<HTMLTableRowElement>
+// >(({ className,onClick,index, ...props }, ref) => (
+  
+//   <tr
+   
+//     ref={ref}
+//     className={cn(
+//       "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
+//       className
+//     )}
+//     onClick={()=>handlePatientClick(index)}
+//     {...props}
+//   />
+// ))
 TableRow.displayName = "TableRow"
 
 const TableHead = React.forwardRef<

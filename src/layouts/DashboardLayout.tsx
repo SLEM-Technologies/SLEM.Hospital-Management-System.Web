@@ -87,7 +87,7 @@ export default function DashboardLayout() {
               </AccountDropdown>
             </ul>
           </header>
-          <section className="h-full bg-[#f6f7fb] p-5">
+          <section className="min-h-screen  bg-[#f6f7fb] p-3 md:p-5">
             <Outlet />
           </section>
         </main>

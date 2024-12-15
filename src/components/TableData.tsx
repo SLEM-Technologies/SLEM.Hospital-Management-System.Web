@@ -12,10 +12,10 @@ export function TableData({headers, children}:{headers:string[], children: JSX.E
         <div>
             <Table>
                 <TableHeader>
-                    <TableRow>
+                    <TableRow >
                         {
                             headers.map(header => (
-                                <TableHead key={header} className="text-xs md:text-sm font-medium text-primaryDarkBlue capitalize">{header}</TableHead>
+                                <TableHead key={header} className="text-xs md:text-sm cursor-default font-medium text-primaryDarkBlue capitalize">{header}</TableHead>
                             ))
                         }
                     </TableRow>

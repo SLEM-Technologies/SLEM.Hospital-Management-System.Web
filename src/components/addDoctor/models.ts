@@ -4,7 +4,7 @@ export interface IBasicForm {
   firstName: string;
   lastName: string;
   email: string;
-  phone: number;
+  phone: string;
   gender: GenderEnum;
   age: number;
   speciality: string;
@@ -16,3 +16,4 @@ export interface IAccountForm {
   username: string;
   password: string;
 }
+

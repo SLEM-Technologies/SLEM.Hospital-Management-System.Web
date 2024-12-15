@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../components/addDoctor/formSchemas";
+import useAuth from '../authentication/useAuth'
 import {
   sanitizeToLetters,
   sanitizeToEmail
@@ -15,15 +16,80 @@ import { ChangeEvent } from "react";
 
 
 export default function Login() {
+  const auth = useAuth();
   const { register, handleSubmit,reset,setValue,
     trigger, formState: { errors } } = useForm({mode: "all",
     reValidateMode: "onSubmit",
     resolver: yupResolver(loginSchema)
   });
-  const onSubmit = data => {
+  const onSubmit = async data => {
     console.log(data);
+    const requestData = {
+      email:data.email,
+      password:data.password,
+      firstLogin:true,
+      hospitalName:''
+    }
+    if (data.email !== "" && data.password !== "") {
+      await auth.loginAction(requestData);
+      return;
+    }
+    // const signInData = {
+    //   email:data.email,
+    //   password:data.password,
+
+    // };
+ 
+    // // console.log(apiUrl);
+    
+    // const response = await fetch(`${apiUrl}/v1/accounts/Login`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(signInData),
+    // });
+
+    // const dataResponse = await response.json();
+    // console.log(dataResponse);
+    // fetchData();
+    
     reset()
   };
+  // async function fetchData() {
+  //   const apiUrl = import.meta.env.VITE_API_URL;
+   
+  //   try {
+  //     const response = await fetch(`${apiUrl}/api/v1/accounts/Login`,{
+  //       method:'POST',
+  //       headers:{
+  //         'Content-Type':'application/json'
+  //       },
+       
+  //     });
+
+  //     console.log(response);
+      
+      
+  //     if (!response.ok) {
+  //       const errorText = await response.text(); // Get error details from the response
+  //       throw new Error(`Network response was not ok. Status: ${response.status}. ${errorText}`);
+  //     }
+      
+  
+  //     const data = await response.json();
+      
+  //     // Log the response data
+  //     console.log('API Response:', data);
+  
+  //   } catch (error) {
+  //     console.error('Fetch error:', error);
+  //   }
+  // }
+  
+  // // Call the function
+  // fetchData();
+  
   return (
     <>
       <h2 className="text-xl font-medium mb-3 mt-8">Login to your account</h2>

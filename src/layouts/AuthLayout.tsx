@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 export default function AuthLayout() {
   return (
-    <div className="h-screen bg-primaryDarkBlue/90 flex justify-center items-center">
+    <div className="min-h-screen bg-primaryDarkBlue/90 flex justify-center items-center">
       <div className="flex bg-white shadow flex-col justify-center items-center w-[95%] md:w-1/3 rounded-sm py-8">
         <Link to="/">
           <Logo />

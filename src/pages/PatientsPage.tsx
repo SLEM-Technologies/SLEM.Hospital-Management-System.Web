@@ -4,6 +4,9 @@ import { PatientsTable } from "@/components/PatientsTable";
 import SearchBar from "@/components/SearchBar";
 import { Link } from "react-router-dom";
 import Button from "@/components/Button";
+import {   useRef } from "react";
+
+
 
 const headers = [
   "Profile",
@@ -17,6 +20,9 @@ const headers = [
 ];
 
 export default function PatientsPage() {
+const index=useRef(null)
+
+
   return (
     <div>
       <nav className="mb-4 md:hidden w-full">
@@ -35,7 +41,8 @@ export default function PatientsPage() {
       </Link>
       <div className="space-y-5 bg-white rounded-md p-5 shadow-md">
         <SearchBar placeholder="Search for a patient" />
-        <PatientsTable headers={headers} patients={Patients} />
+      <PatientsTable headers={headers} patients={Patients}  patientIndex={index} ref={index} /> 
+      
       </div>
       <nav className="mt-10 hidden md:block w-full">
         <PaginationLinks />
